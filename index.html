@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1 id="name">Check if your Company has valid VAT</h1>
+<div id="gecko">
+<input id="yo" type="text" placeholder="VAT NUMBER">
+<button id="submit">GO</button><br>
+<div id="paris"></div>
+</div>
+
+
+
+<script>
+    document.getElementById("submit").addEventListener("click", function() {
+        document.getElementById("submit").disabled = true;
+        fetch('https://api.vatcomply.com/vat?vat_number=' + document.getElementById("yo").value).then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            console.log(data);
+            for (var i in data) {
+                console.log(i)
+                let x = document.createElement("p")
+                x.textContent = i + ": " + data[i];
+                document.getElementById("paris").appendChild(x)
+
+            }
+
+
+        })
+
+    })
+
+
+</script>
+</body>
+</html>
